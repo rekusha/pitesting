@@ -1,57 +1,49 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hello world</title>
-<style>
-  * { box-sizing: border-box; }
-
-  html, body { height: 100%; margin: 0; }
-
-  /* Райдужний анімований градієнт на весь екран */
-  body {
-    display: grid;
-    place-items: center;
-    background: linear-gradient(
-      135deg,
-      #ff0000, #ff8000, #ffff00, #00ff00,
-      #0080ff, #4000ff, #8000ff, #ff0080, #ff0000
-    );
-    background-size: 300% 300%;
-    animation: rainbow-shift 12s linear infinite;
-  }
-
-  @keyframes rainbow-shift {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
-  }
-
-  /* Текст: чорний → сірий → білий → сірий → чорний (і в зворотному порядку) */
-  h1 {
-    margin: 0;
-    font: 700 clamp(2.5rem, 12vw, 9rem)/1.1 system-ui, "Segoe UI", Roboto, sans-serif;
-    letter-spacing: -0.02em;
-    text-align: center;
-    color: #000;
-    animation: text-shade 8s ease-in-out infinite;
-  }
-
-  @keyframes text-shade {
-    0%   { color: #000000; }  /* чорний */
-    25%  { color: #808080; }  /* сірий */
-    50%  { color: #ffffff; }  /* білий */
-    75%  { color: #808080; }  /* сірий */
-    100% { color: #000000; }  /* назад до чорного */
-  }
-
-  /* Повага до налаштувань доступності */
-  @media (prefers-reduced-motion: reduce) {
-    body, h1 { animation: none; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hello world</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          keyframes: {
+            'rainbow-shift': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '100%': { backgroundPosition: '300% 50%' },
+            },
+            'text-shade': {
+              '0%, 100%': { color: '#000000' },
+              '25%, 75%': { color: '#808080' },
+              '50%': { color: '#ffffff' },
+            },
+          },
+          animation: {
+            'rainbow-shift': 'rainbow-shift 12s linear infinite',
+            'text-shade': 'text-shade 8s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .bg-rainbow {
+      background: linear-gradient(
+        135deg,
+        #ff0000, #ff8000, #ffff00, #00ff00,
+        #0080ff, #4000ff, #8000ff, #ff0080, #ff0000
+      );
+      background-size: 300% 300%;
+    }
+  </style>
 </head>
-<body>
-  <h1>hello world</h1>
+<body class="min-h-dvh m-0 grid place-items-center bg-rainbow animate-rainbow-shift motion-reduce:animate-none">
+  <main class="px-4 text-center">
+    <h1 class="m-0 font-sans font-bold tracking-tight leading-[1.1] text-[clamp(2.5rem,12vw,9rem)] text-black animate-text-shade motion-reduce:animate-none">
+      hello world
+    </h1>
+  </main>
 </body>
 </html>
