@@ -11,8 +11,8 @@
         extend: {
           keyframes: {
             'rainbow-shift': {
-              '0%': { backgroundPosition: '0% 50%' },
-              '100%': { backgroundPosition: '300% 50%' },
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
             },
             'text-shade': {
               '0%, 100%': { color: '#000000' },
@@ -21,7 +21,7 @@
             },
           },
           animation: {
-            'rainbow-shift': 'rainbow-shift 12s linear infinite',
+            'rainbow-shift': 'rainbow-shift 16s ease-in-out infinite',
             'text-shade': 'text-shade 8s ease-in-out infinite',
           },
         },
